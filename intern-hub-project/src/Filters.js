@@ -31,6 +31,10 @@ class Job {
   function filterJobsBySalary(jobs, salaryThreshold) {
     return jobs.filter(job => job.salary > salaryThreshold);
   }
+
+  function filterJobsByLocation(jobs, location) {
+    return jobs.filter(job => job.location.toLowerCase().includes(location.toLowerCase()));
+  }
   
   // Function to delete a job by its ID
   function deleteJob(jobs, jobId) {
@@ -70,3 +74,7 @@ class Job {
   console.log("\nRemaining Jobs:");
   jobs.forEach(job => console.log(job.getDetails()));
   
+  const usaJobs = filterJobsByLocation(jobs, "USA");
+
+console.log("\nJobs located in the USA:");
+usaJobs.forEach(job => console.log(job.getDetails()));

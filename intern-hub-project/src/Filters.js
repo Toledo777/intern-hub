@@ -1,13 +1,12 @@
 class Job {
-  constructor(id, name, review, position, country, city, datePosted, salary) {
-    this.id = id; // The unique ID for each job
-    this.name = name; // The name of the company posting the job
-    this.review = review; // The review by a former or current employee
-    this.position = position; // The intern position being offered
-    this.country = country; // The country of the job location (USA or Canada)
-    this.city = city; // The city of the job location
-    this.datePosted = datePosted; // The date the job was posted
-    this.salary = salary; // The salary offered for the job
+  constructor(id, name, review, position, location, datePosted, salary) {
+    this.id = id;
+    this.name = name;
+    this.review = review;
+    this.position = position;
+    this.location = location; 
+    this.datePosted = datePosted; 
+    this.salary = salary;
   }
 
   getDetails() {
@@ -16,15 +15,35 @@ class Job {
       Company: ${this.name}
       Review: ${this.review}
       Position: ${this.position}
-      Country: ${this.country}
-      City: ${this.city}
+      Location: ${this.location}
       Date Posted: ${this.datePosted}
       Salary: $${this.salary}
     `;
   }
 }
 
-// Create an array of 30 intern positions located in the USA or Canada
+function filterJobsByCompany(jobs, companyName) {
+  return jobs.filter(job => job.name.toLowerCase() === companyName.toLowerCase());
+}
+
+function filterJobsBySalary(jobs, salaryThreshold) {
+  return jobs.filter(job => job.salary > salaryThreshold);
+}
+
+function filterJobsByLocation(jobs, location) {
+  return jobs.filter(job => job.location.toLowerCase().includes(location.toLowerCase()));
+}
+
+function deleteJob(jobs, jobId) {
+  const index = jobs.findIndex(job => job.id === jobId);
+  if (index !== -1) {
+    jobs.splice(index, 1);
+    console.log(`Job with ID ${jobId} deleted successfully.`);
+  } else {
+    console.log(`Job with ID ${jobId} not found.`);
+  }
+}
+
 const jobs = [
   new Job(1, "Google", "Gained experience working on cloud-based applications.", "Intern Developer", "USA", "Mountain View", "2024-11-01", 50000),
   new Job(2, "Microsoft", "Learned to analyze big datasets and present insights.", "Intern Data Analyst", "USA", "Redmond", "2024-11-02", 52000),
@@ -58,6 +77,16 @@ const jobs = [
   new Job(30, "IBM", "Researched blockchain integrations for secure systems.", "Intern Blockchain Developer", "USA", "San Francisco", "2024-11-30", 55000)
 ];
 
-// Display all jobs
-console.log("All Intern Jobs:");
+const highSalaryJobs = filterJobsBySalary(jobs, 80000);
+console.log("Jobs with salary greater than $80,000:");
+highSalaryJobs.forEach(job => console.log(job.getDetails()));
+const googleJobs = filterJobsByCompany(jobs, "Google");
+console.log("\nJobs at Google:");
+googleJobs.forEach(job => console.log(job.getDetails()));
+const usaJobs = filterJobsByLocation(jobs, "USA");
+console.log("\nJobs located in the USA:");
+usaJobs.forEach(job => console.log(job.getDetails()));
+deleteJob(jobs, 3);
+
+console.log("\nRemaining Jobs:");
 jobs.forEach(job => console.log(job.getDetails()));

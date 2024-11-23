@@ -12,16 +12,53 @@
     gap: 1rem;
 }
 
-.searchInput {
-    width: 30%;
-    height: 30px;
+.searchBox {
+    height: 26px;
     padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
     border-radius: 25px;
-    font-size: 1rem;
     border: 1px solid #797979;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 380px;
+}
+
+.searchInput {
+    font-size: 1rem;
+    border: none;
+    background: none;
+    outline: none;
+    width: 345px;
+    height: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
 }
 
 .searchInput:focus {
     outline: none;
+}
+
+.searchBtn {
+    fill: white;
+    float: right;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+
+.searchBtn:hover {
+    cursor: pointer;
+}
+
+.searchIcon {
+    font-size: 24px;
+    height: 25px;
+    width: 25px;
+}
+
+.vertical_line {
+    height: 48px;
+    border-left: 1px solid #505050;
 }

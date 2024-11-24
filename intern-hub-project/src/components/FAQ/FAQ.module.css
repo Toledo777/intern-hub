@@ -10,19 +10,19 @@
   font-family: "Poppins", sans-serif;
 
   position: absolute;
-  top: 55%;
+  top: 49%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.faqHeader {
+/* .faqHeader {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   text-align: center;
   border-bottom: 1px solid #505050;
   padding-bottom: 1rem;
-}
+} */
 
 .faqItem {
   margin-bottom: 1.5rem;

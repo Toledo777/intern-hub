@@ -4,7 +4,7 @@ import styles from "./FAQ.module.css"; // Reusing your FAQ styles
 const FAQ: React.FC = () => {
   return (
     <div className={styles.faqContainer}>
-      <h1 className={styles.faqHeader}>Frequently Asked Questions</h1>
+      {/* <h1 className={styles.faqHeader}>Frequently Asked Questions</h1> */}
 
       <div className={styles.faqItem}>
         <h3 className={styles.faqQuestion}>What is InternHub?</h3>

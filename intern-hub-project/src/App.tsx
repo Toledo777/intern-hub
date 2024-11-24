@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Searchbar from "./components/Searchbar/Searchbar";
 import FAQ from "./components/FAQ/FAQ";
 import Contribute from "./components/Contribute/Contribute";
+import MainContent from "./layout/MainContent";
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
   );
 }
 
+
 // Component to conditionally render the Searchbar
 function ConditionalSearchbar() {
   const location = useLocation(); // Get current route
@@ -32,7 +35,8 @@ function ConditionalSearchbar() {
 }
 
 function Home() {
-  return <div>Welcome to InternHub!</div>;
+  return <MainContent />;
 }
+
 
 export default App;

@@ -34,6 +34,7 @@
     height: 30px;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
+    color: white; /* Updated text color to white */
 }
 
 .searchInput:focus {
@@ -74,23 +75,27 @@ select {
     font-size: 16px;
     font-family: "Poppins", sans-serif;
     font-weight: 200;
-    color: white;
+    color: white; /* Updated dropdown text color to white */
 }
 
 .countryDropdown {
     padding: 4px 12px 4px 0px;
     letter-spacing: 0.5px;
+    color: white; /* Ensuring dropdown text is white */
 }
 
 .cityDropdown {
     padding: 4px 12px 4px 0px;
     letter-spacing: 0.6px;
     max-width: 200px;
+    color: white; /* Ensuring dropdown text is white */
 }
 
 .cityDropdown option:disabled {
     max-width: 100px;
+    color: gray; /* Optional: gray for disabled text */
 }
+
 select option:disabled {
     display: none;
 }
@@ -100,11 +105,13 @@ select:focus, select:active {
 }
 
 .refreshBtn {
+    fill: white;
     display: flex;
     align-items: center;
     cursor: pointer;
     font-weight: 200;
     font-size: 16px;
+    color: white; /* Ensuring button text is white */
 }
 
 .refreshIcon {

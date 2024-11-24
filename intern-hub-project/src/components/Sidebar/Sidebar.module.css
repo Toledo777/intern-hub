@@ -1,11 +1,9 @@
 .sidebar {
     position: sticky;
     width: 250px;
-    /* width: 60%; */
     padding: 1rem;
     background-color: #F9F9F9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* #eee */
     border-right: 1px solid #d6d6d6; 
     overflow-y: auto;
     height: 100vh;

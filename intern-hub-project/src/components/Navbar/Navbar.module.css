@@ -49,8 +49,17 @@
 
 .userSection {
   font-style: normal;
+  display: flex;
+  flex-direction: row;
+  gap: 5px
 }
 
 .location {
   font-size: 0.95rem;
+}
+
+.locationIcon {
+    fill: white;
+    width: 20px;
+    height: 20px;
 }

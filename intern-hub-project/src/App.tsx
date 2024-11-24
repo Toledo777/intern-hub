@@ -11,8 +11,9 @@ import Contribute from "./components/Contribute/Contribute";
 import MainContent from "./layout/MainContent";
 import { useState, useEffect } from "react";
 import { getAllJobs, Job } from "./utils/filters";
+import { useBackgroundColor } from "./utils/filters";
 
-function App() {
+export default function App() {
   // State management for dropdowns and jobs
   const [country, setCountry] = useState<string>("");
   const [region, setRegion] = useState<string>("");
@@ -112,6 +113,7 @@ function Home({
   setFilteredJobs: React.Dispatch<React.SetStateAction<Job[]>>;
   onAddJob: (newJob: Job) => void;
 }) {
+  useBackgroundColor("#F9F9F9");
   return (
     <MainContent
       filteredJobs={filteredJobs}
@@ -121,4 +123,3 @@ function Home({
   );
 }
 
-export default App;

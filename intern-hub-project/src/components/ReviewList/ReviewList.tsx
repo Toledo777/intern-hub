@@ -18,7 +18,11 @@ const ReviewList: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.reviewList}>
+    <div className={styles.reviewContainer}>
+        <div className={styles.reviewHeader}>
+            <h1>Recommended reviews</h1>
+            <button className={styles.sortBtn}>Sort by</button>
+        </div>
       {jobs.map((job) => (
         <ReviewCard
           key={job.id}

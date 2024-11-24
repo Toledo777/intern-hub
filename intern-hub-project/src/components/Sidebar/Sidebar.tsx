@@ -20,13 +20,25 @@ const Sidebar: React.FC = () => {
         <div className={styles.filterGroup}>
           <h4>Employment Type</h4>
           <label>
-            <input type="checkbox" /> On-Site
+            <input type="checkbox" /> On-site
           </label>
           <label>
             <input type="checkbox" /> Hybrid
           </label>
           <label>
             <input type="checkbox" /> Remote
+          </label>
+        </div>
+        <div className={styles.filterGroup}>
+          <h4>Question Type</h4>
+          <label>
+            <input type="checkbox" /> OOP
+          </label>
+          <label>
+            <input type="checkbox" /> LeetCode
+          </label>
+          <label>
+            <input type="checkbox" /> System Design
           </label>
         </div>
       </div>

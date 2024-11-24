@@ -42,28 +42,52 @@ export class Job {
     }
 }
 
+// Retrieve all existing jobs
 export function getAllJobs(): Job[] {
     return jobs;
 }
 
-function filterJobsByCompany(jobs: Job[], companyName: string): Job[] {
+// Retrieve the total number of jobs
+export function getTotalJobs(jobs: Job[]): number {
+    return jobs.length;
+}
+
+// Sort jobs based on the date (most recent)
+export function sortByDate(jobs: Job[]): Job[] {
+    return jobs.sort((a, b) => new Date(b.datePosted).getTime() - new Date(a.datePosted).getTime());
+}
+
+// Sort jobs based on the salary (low to high)
+export function sortBySalaryLowToHigh(jobs: Job[]): Job[] {
+    return jobs.sort((a, b) => a.salary - b.salary);
+}
+
+// Sort jobs based on the salary (high to low)
+export function sortBySalaryHighToLow(jobs: Job[]): Job[] {
+    return jobs.sort((a, b) => b.salary - a.salary);
+}
+
+// Filter jobs by company name
+export function filterJobsByCompany(jobs: Job[], companyName: string): Job[] {
     return jobs.filter(job => job.name.toLowerCase() === companyName.toLowerCase());
 }
 
-function filterJobsBySalary(jobs: Job[], salaryThreshold: number): Job[] {
+// Filter jobs exceeding inputted threshold
+export function filterJobsBySalary(jobs: Job[], salaryThreshold: number): Job[] {
     return jobs.filter(job => job.salary > salaryThreshold);
 }
 
-function filterJobsByCountry(jobs: Job[], country: string): Job[] {
+// Filter jobs by country
+export function filterJobsByCountry(jobs: Job[], country: string): Job[] {
     return jobs.filter(job => job.country.toLowerCase() === country.toLowerCase());
 }
 
-function filterJobsByCity(jobs: Job[], city: string): Job[] {
+// Filter jobs by city
+export function filterJobsByCity(jobs: Job[], city: string): Job[] {
     return jobs.filter(job => job.city.toLowerCase().includes(city.toLowerCase()));
 }
 
-
-function deleteJob(jobs: Job[], jobId: number): void {
+export function deleteJob(jobs: Job[], jobId: number): void {
     const index = jobs.findIndex(job => job.id === jobId);
     if (index !== -1) {
         jobs.splice(index, 1);

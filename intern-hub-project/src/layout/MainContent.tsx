@@ -4,6 +4,8 @@ import ReviewList from "../components/ReviewList/ReviewList";
 import styles from "./MainContent.module.css";
 
 const MainContent: React.FC = () => {
+
+
   return (
     <div className={styles.mainContent}>
       <Sidebar />

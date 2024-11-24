@@ -217,7 +217,7 @@ const Searchbar: React.FC<SearchbarProps> = ({
       <div className={styles.vertical_line}></div>
 
       <span className={styles.refreshBtn} onClick={handleRefresh}>
-        Refresh
+        Clear
         <RefreshIcon className={styles.refreshIcon}></RefreshIcon>
       </span>
     </div>

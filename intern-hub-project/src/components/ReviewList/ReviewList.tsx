@@ -35,6 +35,10 @@ const ReviewList: React.FC<ReviewListProps> = ({ filteredJobs }) => {
               jobDate={job.datePosted}
               jobSalary={job.salary}
               jobLogo={job.logo}
+              jobQuestionType={job.questionType}
+              jobRounds={job.numberOfRounds}
+              jobType={job.type}
+              jobSignOnBonus={job.signOnBonus}
             />
           ))
         ) : (

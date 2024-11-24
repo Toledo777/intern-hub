@@ -1,5 +1,5 @@
 /// <reference types="vite-plugin-svgr/client" />
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ReviewCard.module.css";
 import BookmarkIcon from "../../assets/bookmark.svg?react";
 
@@ -12,11 +12,34 @@ interface ReviewCardProps {
   jobDate: string;
   jobSalary: number;
   jobLogo: string;
+  jobQuestionType: string;
+  jobRounds: number;
+  jobType: string;
+  jobSignOnBonus: number;
 }
 
-const ReviewCard: React.FC<ReviewCardProps> = ({ jobTitle, jobDate, jobCompany, jobSalary, jobCountry, jobCity, jobLogo }) => {
-  return (
-    <div className={styles.reviewCard}>
+const ReviewCard: React.FC<ReviewCardProps> = ({
+    jobTitle,
+    jobDate,
+    jobCompany,
+    jobSalary,
+    jobCountry,
+    jobCity,
+    jobLogo,
+    jobQuestionType,
+    jobRounds,
+    jobType,
+    jobAdditionalComments,
+    jobSignOnBonus,
+  }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+  
+    function handleDetailsClick() {
+      setIsExpanded(!isExpanded);
+    }
+
+    return (
+    <div className={`${styles.reviewCard} ${isExpanded ? styles.expand : ""}`}>
       <div className={styles.reviewContent}>
 
         <div className={styles.dateSection}>
@@ -28,11 +51,25 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ jobTitle, jobDate, jobCompany, 
 
         <div className={styles.positionSection}>
             <p>{jobCompany}</p>
-            
+
             <div className={styles.titleIcon}>
                 <h3>{jobTitle}</h3>
                 <img className={styles.logo} src={jobLogo} alt="" />
             </div>
+        </div>
+
+        <div className={styles.reviewBadges}>
+            {!isExpanded && (
+              <>
+                <p>{jobType}</p>
+                <p>{jobQuestionType}</p>
+                <p>{jobRounds} rounds</p>
+              </>)}
+            {isExpanded && (
+                <>
+                <p>{jobAdditionalComments}</p>
+                <p>${jobSignOnBonus} Bonus</p>
+                </>)}
         </div>
         
       </div>
@@ -43,7 +80,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ jobTitle, jobDate, jobCompany, 
             <p className={styles.location}>{jobCity}, {jobCountry}</p>
         </div>
         <div className={styles.rightDetails}>
-            <button className={styles.detailsBtn}>Details</button>
+            <button className={styles.detailsBtn} onClick={handleDetailsClick}>Details</button>
         </div>
       </div>
     </div>

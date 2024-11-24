@@ -1,9 +1,14 @@
-/// <reference types="vite-plugin-svgr/client" />
+import React, { useState } from "react";
 import styles from "./Searchbar.module.css";
-import SearchIcon from '../../assets/search.svg?react';
-import RefreshIcon from '../../assets/refresh.svg?react';
-import React, { useState, useEffect } from "react";
-import { getAllJobs, Job, filterJobsByCountry, filterJobsByCity, updateJobs } from "../../utils/filters";
+import SearchIcon from "../../assets/search.svg?react";
+import RefreshIcon from "../../assets/refresh.svg?react";
+import {
+  filterJobsByCountry,
+  filterJobsByCity,
+  searchJobs,
+  getAllJobs,
+  Job,
+} from "../../utils/filters";
 
 const USA_STATES = [
   "Alabama",
@@ -55,7 +60,7 @@ const USA_STATES = [
   "Washington",
   "West Virginia",
   "Wisconsin",
-  "Wyoming"
+  "Wyoming",
 ];
 
 const CANADA_PROVINCES = [
@@ -71,47 +76,97 @@ const CANADA_PROVINCES = [
   "Saskatchewan",
   "Northwest Terr.",
   "Nunavut",
-  "Yukon"
+  "Yukon",
 ];
 
-const Searchbar: React.FC = () => {
-  const [jobs, setJobs] = useState<Job[]>(getAllJobs());
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>(jobs);
-  const [country, setCountry] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
+interface SearchbarProps {
+  country: string;
+  setCountry: React.Dispatch<React.SetStateAction<string>>;
+  region: string;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
+  onRefresh: () => void;
+  setFilteredJobs: React.Dispatch<React.SetStateAction<Job[]>>;
+}
 
-  useEffect(() => {
-    // Update regions dropdown and reset region filter when country changes
-    setRegion("");
-    if (country) {
-      const newJobs = filterJobsByCountry(jobs, country);
-      setFilteredJobs(newJobs);
-      updateJobs(newJobs)
+const Searchbar: React.FC<SearchbarProps> = ({
+  country,
+  setCountry,
+  region,
+  setRegion,
+  onRefresh,
+  setFilteredJobs,
+}) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const baseJobs = JSON.parse(localStorage.getItem("filteredJobs") || "[]");
+    const jobsToFilter = baseJobs.length > 0 ? baseJobs : getAllJobs();
+
+    if (query.trim() !== "") {
+      const filtered = searchJobs(jobsToFilter, query);
+      setFilteredJobs(filtered);
+      localStorage.setItem("filteredJobs", JSON.stringify(filtered));
     } else {
-      setFilteredJobs(jobs);
+      let filtered = getAllJobs();
+      if (country) {
+        filtered = filterJobsByCountry(filtered, country);
+      }
+      if (region) {
+        filtered = filterJobsByCity(filtered, region);
+      }
+      setFilteredJobs(filtered);
+      localStorage.setItem("filteredJobs", JSON.stringify(filtered));
     }
-  }, [country, jobs]);
-
-  useEffect(() => {
-    // Filter jobs by city/region when a region is selected
-    if (region) {
-      const newJobs = filterJobsByCity(filteredJobs, region);
-      setFilteredJobs(newJobs);
-      updateJobs(newJobs)
-    }
-  }, [region]);
+  };
 
   const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCountry(event.target.value);
+    const selectedCountry = event.target.value;
+    setCountry(selectedCountry);
+
+    let filtered = getAllJobs();
+    filtered = filterJobsByCountry(filtered, selectedCountry);
+    setFilteredJobs(filtered);
+    setRegion("");
+
+    localStorage.setItem("filteredJobs", JSON.stringify(filtered)); 
   };
 
   const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setRegion(event.target.value);
+    const selectedRegion = event.target.value;
+    setRegion(selectedRegion);
+
+    let baseJobs = JSON.parse(localStorage.getItem("filteredJobs") || "[]");
+    if (baseJobs.length === 0) {
+      baseJobs = getAllJobs();
+    }
+
+    let filtered = baseJobs;
+    if (country) {
+      filtered = filterJobsByCountry(baseJobs, country);
+    }
+    filtered = filterJobsByCity(filtered, selectedRegion);
+
+    setFilteredJobs(filtered);
+    localStorage.setItem("filteredJobs", JSON.stringify(filtered)); 
+  };
+
+  const handleRefresh = () => {
+    // Reset filters and clear local storage for filtered jobs
+    setSearchQuery("");
+    setCountry("");
+    setRegion("");
+    const allJobs = getAllJobs();
+    setFilteredJobs(allJobs);
+
+    localStorage.removeItem("filteredJobs"); 
+    onRefresh();
   };
 
   return (
     <div className={styles.searchBar}>
-
       <div className={styles.searchBox}>
         <span className={styles.searchBtn}>
           <SearchIcon className={styles.searchIcon}></SearchIcon>
@@ -120,35 +175,49 @@ const Searchbar: React.FC = () => {
           type="text"
           placeholder="Search for jobs, companies, or keywords..."
           className={styles.searchInput}
+          value={searchQuery}
+          onChange={handleSearchChange}
         />
-        {/* <span className={styles.searchBtn}>
-          <SearchIcon className={styles.searchIcon}></SearchIcon>
-        </span> */}
       </div>
 
       <div className={styles.vertical_line}></div>
 
-      <select name="Country dropdown" value={country} className={styles.countryDropdown} onChange={handleCountryChange}>
-        <option value="" disabled selected>Country</option>
+      <select
+        value={country}
+        className={styles.countryDropdown}
+        onChange={handleCountryChange}
+      >
+        <option value="" disabled>
+          Country
+        </option>
         <option value="Canada">Canada</option>
         <option value="USA">USA</option>
       </select>
 
       <div className={styles.vertical_line}></div>
 
-      <select name="Location dropdown" value={region} className={styles.cityDropdown} onChange={handleRegionChange} disabled={!country}> 
-        <option value="" disabled selected>State / Province &nbsp;</option>
-        {(country === "Canada" ? CANADA_PROVINCES : USA_STATES).map((location) => (
-          <option key={location} value={location}>
-            {location}
-          </option>
-        ))}
+      <select
+        value={region}
+        className={styles.cityDropdown}
+        onChange={handleRegionChange}
+        disabled={!country}
+      >
+        <option value="" disabled>
+          State / Province &nbsp;
+        </option>
+        {(country === "Canada" ? CANADA_PROVINCES : USA_STATES).map(
+          (location) => (
+            <option key={location} value={location}>
+              {location}
+            </option>
+          )
+        )}
       </select>
 
       <div className={styles.vertical_line}></div>
-      
-      <span className={styles.refreshBtn}>
-        Refresh 
+
+      <span className={styles.refreshBtn} onClick={handleRefresh}>
+        Refresh
         <RefreshIcon className={styles.refreshIcon}></RefreshIcon>
       </span>
     </div>

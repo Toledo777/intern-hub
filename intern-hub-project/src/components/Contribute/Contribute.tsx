@@ -13,10 +13,15 @@ import metaLogo from "../../assets/logo/Meta.png";
 import microsoftLogo from "../../assets/logo/Microsoft.png";
 import twitterLogo from "../../assets/logo/twitter.png";
 import morganStanleyLogo from "../../assets/logo/MorganStanley.png";
+import { Job } from "../../utils/filters"; 
 
-const Contribute: React.FC = () => {
+// Define props for the Contribute component
+interface ContributeProps {
+  onAddJob: (newJob: Job) => void; 
+}
+
+const Contribute: React.FC<ContributeProps> = ({ onAddJob }) => {
   const [formData, setFormData] = useState({
-    id: Date.now(),
     name: "",
     additionalComments: "",
     position: "",
@@ -63,29 +68,28 @@ const Contribute: React.FC = () => {
 
     const logo = getCompanyLogo(formData.name);
 
-    const newJob = {
-      id: formData.id,
-      name: formData.name,
-      additionalComments: formData.additionalComments,
-      position: formData.position,
-      country: formData.country,
-      city: formData.city,
-      datePosted: formData.datePosted,
-      salary: parseFloat(formData.salary) || 0,
-      type: formData.type,
-      questionType: formData.questionType,
-      numberOfRounds: parseInt(formData.numberOfRounds) || 0,
-      signOnBonus: parseFloat(formData.signOnBonus) || 0,
-      offerStatus: formData.offerStatus,
-      logo, // Assign the logo dynamically
-    };
+    // Create a new Job instance
+    const newJob = new Job(
+      Date.now(),
+      formData.name,
+      formData.additionalComments,
+      formData.position,
+      formData.country,
+      formData.city,
+      formData.datePosted,
+      parseFloat(formData.salary) || 0,
+      formData.type,
+      formData.questionType,
+      parseInt(formData.numberOfRounds) || 0,
+      parseFloat(formData.signOnBonus) || 0,
+      formData.offerStatus
+    );
 
-    const existingJobs = JSON.parse(localStorage.getItem("jobs") || "[]");
-    existingJobs.push(newJob);
-    localStorage.setItem("jobs", JSON.stringify(existingJobs));
+    // Call the onAddJob handler to update the parent state
+    onAddJob(newJob);
 
+    // Reset the form
     setFormData({
-      id: Date.now(),
       name: "",
       additionalComments: "",
       position: "",
@@ -100,12 +104,10 @@ const Contribute: React.FC = () => {
       offerStatus: "No",
     });
 
-    alert("Job added successfully!");
   };
 
   return (
     <div className={styles.contributeContainer}>
-      {/* <h1 className={styles.header}>Share Your Experience</h1> */}
       <form onSubmit={handleSubmit} className={styles.form}>
         {/* Company Name and Position */}
         <div className={styles.row}>
@@ -147,7 +149,7 @@ const Contribute: React.FC = () => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="city">City</label>
+            <label htmlFor="city">State/Province</label>
             <input
               type="text"
               id="city"
@@ -226,7 +228,7 @@ const Contribute: React.FC = () => {
           </div>
         </div>
 
-        {/* Question Types and Offer Status */}
+        {/* Salary Details */}
         <div className={styles.row}>
           <div className={styles.formGroup}>
             <label htmlFor="salary">Hourly Salary (if applicable)</label>

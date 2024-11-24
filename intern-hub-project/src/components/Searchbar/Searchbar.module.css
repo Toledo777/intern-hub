@@ -22,6 +22,7 @@
     display: flex;
     justify-content: space-between;
     width: 380px;
+    gap: 10px;
 }
 
 .searchInput {
@@ -29,7 +30,7 @@
     border: none;
     background: none;
     outline: none;
-    width: 345px;
+    width: 350px;
     height: 30px;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
@@ -62,4 +63,53 @@
 .vertical_line {
     height: 48px;
     border-left: 1px solid #505050;
+}
+
+select {
+    height: 40px;
+    padding: 4px 12px 4px 0px;
+    border: none;
+    background-color: #141413;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    color: white;
+}
+
+.countryDropdown {
+    padding: 4px 12px 4px 0px;
+    letter-spacing: 0.5px;
+}
+
+.cityDropdown {
+    padding: 4px 12px 4px 0px;
+    letter-spacing: 0.6px;
+    max-width: 200px;
+}
+
+.cityDropdown option:disabled {
+    max-width: 100px;
+}
+select option:disabled {
+    display: none;
+}
+
+select:focus, select:active {
+    outline: none;
+}
+
+.refreshBtn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.refreshIcon {
+    fill: rgb(219, 219, 219);
+    height: 20px;
+    width: 20px;
+    padding-left: 10px;
 }

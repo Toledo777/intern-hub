@@ -23,6 +23,7 @@
 .navLinks {
     display: flex;
     gap: 10px;
+    text-align: center;
 }
 
 .navbar a {

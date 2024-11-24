@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ReviewList.module.css";
 import ReviewCard from "./ReviewCard";
-import { getAllJobs, Job } from "../../data/filters";
+import { getAllJobs, Job } from "../../utils/filters";
 
 const ReviewList: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
 
-  // Fetch all jobs at once
   const fetchAllJobs = async () => {
     const allJobs = getAllJobs();
     setJobs(allJobs);

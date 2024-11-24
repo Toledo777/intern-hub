@@ -10,6 +10,7 @@ import amazonLogo from "../assets/logo/amazon.png";
 import coveoLogo from "../assets/logo/Coveo.png";
 import appleLogo from "../assets/logo/apple.jpg";
 import googleLogo from "../assets/logo/Google.png";
+import { useEffect } from "react";
 
 export class Job {
 
@@ -273,4 +274,14 @@ export function resetJobs(): void {
       new Job(30, "Twitter", "Researched blockchain integrations for secure systems.", "Intern Blockchain Developer", "USA", "California", "2024-11-30", 26.44, "On-site", "Other", 3, 8000, "Offer"),
     ];
 }
+
+// Apply different background-color on body
+export const useBackgroundColor = (color: string) => {
+    useEffect(() => {
+      document.body.style.backgroundColor = color;
+      return () => {
+        document.body.style.backgroundColor = ""; // Reset to default on unmount
+      };
+    }, [color]);
+};
 

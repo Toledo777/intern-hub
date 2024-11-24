@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
+import LocationIcon from "../../assets/location.svg?react";
 
 const Navbar: React.FC = () => {
   return (
@@ -28,6 +29,9 @@ const Navbar: React.FC = () => {
         </NavLink>
       </div>
       <div className={styles.userSection}>
+        <span className={styles.locationIconContainer}>
+          <LocationIcon className={styles.locationIcon}></LocationIcon>
+        </span>
         <div className={styles.location}>Montreal, QC</div>
       </div>
     </nav>

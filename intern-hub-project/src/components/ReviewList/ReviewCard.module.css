@@ -6,7 +6,7 @@
     border: 1px solid #505050;
     transition: transform 0.2s ease-in-out;
     width: 340px;
-    height: auto;
+    max-height: 310px;
     border-radius: 25px;
     color: black;
 }

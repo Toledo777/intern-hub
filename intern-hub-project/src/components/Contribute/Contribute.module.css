@@ -5,9 +5,8 @@
   margin-top: 35px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 70%; /* Reduced width for better responsiveness */
-  max-width: 800px; /* Ensures the form doesn't get too wide */
-  /* margin: auto; */
+  width: 70%; 
+  max-width: 800px; 
   position: absolute;
   top: 50%;
   left: 50%;
@@ -15,14 +14,6 @@
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
-
-/* .header {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  width: 100%;
-} */
 
 .row {
   display: flex;
@@ -55,7 +46,7 @@
 .formGroup input:focus,
 .formGroup textarea:focus,
 .formGroup select:focus {
-  border-color: #28a745;
+  border-color: #e2e2e2;
   outline: none;
 }
 
@@ -78,20 +69,21 @@ label {
 }
 
 .submitButton {
-  background-color: #28a745;
+  background-color: transparent;
   color: #fff;
   border: none;
   padding: 0.7rem 1.25rem;
-  border-radius: 4px;
+  border-radius: 16px;
   font-size: 0.95rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
   align-self: center;
   width: 140px;
+  border: 1px solid #797979;
 }
 
 .submitButton:hover {
-  background-color: #218838;
+  background-color: rgb(36, 36, 36);
 }
 
 @media (max-width: 1024px) {

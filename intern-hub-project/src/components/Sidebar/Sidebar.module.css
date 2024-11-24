@@ -41,4 +41,5 @@ h3 {
     display: block;
     margin-bottom: 0.5rem;
     cursor: pointer;
+    font-weight: 400;
 }

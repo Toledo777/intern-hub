@@ -1,16 +1,20 @@
-/// <reference types="vite-plugin-svgr/client" />
 import React, { useState, useEffect } from "react";
 import styles from "./ReviewList.module.css";
 import ReviewCard from "./ReviewCard";
-import { getAllJobs, Job } from "../../data/filters";
+import { Job } from "../../data/filters";
 
 const ReviewList: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
 
-  // Fetch all jobs at once
-  const fetchAllJobs = async () => {
-    const allJobs = getAllJobs();
-    setJobs(allJobs);
+  // Fetch jobs from local storage
+  const fetchAllJobs = () => {
+    const storedJobs = localStorage.getItem("jobs");
+    if (storedJobs) {
+      const parsedJobs: Job[] = JSON.parse(storedJobs);
+      setJobs(parsedJobs);
+    } else {
+      console.error("No jobs found in local storage.");
+    }
   };
 
   useEffect(() => {

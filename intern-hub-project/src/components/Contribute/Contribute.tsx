@@ -1,22 +1,53 @@
 import React, { useState } from "react";
-import { Interview } from "../models/Interview";
 import styles from "./Contribute.module.css";
+import airbnbLogo from "../../assets/logo/airbnb.png";
+import amazonLogo from "../../assets/logo/amazon.png";
+import appleLogo from "../../assets/logo/apple.jpg";
+import coveoLogo from "../../assets/logo/Coveo.png";
+import defaultLogo from "../../assets/logo/default.jpg";
+import googleLogo from "../../assets/logo/Google.png";
+import ibmLogo from "../../assets/logo/IBM.jpg";
+import intactLogo from "../../assets/logo/Intact.png";
+import lyftLogo from "../../assets/logo/Lyft.png";
+import metaLogo from "../../assets/logo/Meta.png";
+import microsoftLogo from "../../assets/logo/Microsoft.png";
+import twitterLogo from "../../assets/logo/twitter.png";
+import morganStanleyLogo from "../../assets/logo/MorganStanley.png";
 
 const Contribute: React.FC = () => {
   const [formData, setFormData] = useState({
-    company: "",
+    id: Date.now(),
+    name: "",
+    additionalComments: "",
     position: "",
     country: "",
     city: "",
-    employmentType: "In-Person",
-    date: "",
-    rounds: "",
-    questionTypes: "",
-    compensation: "",
+    datePosted: "",
+    salary: "",
+    type: "In-Person",
+    questionType: "",
+    numberOfRounds: "",
     signOnBonus: "",
-    additionalComments: "",
-    offer: "No",
+    offerStatus: "No",
   });
+
+  const getCompanyLogo = (companyName: string): string => {
+    const companyImages: { [key: string]: string } = {
+      Airbnb: airbnbLogo,
+      IBM: ibmLogo,
+      Intact: intactLogo,
+      Lyft: lyftLogo,
+      Meta: metaLogo,
+      Microsoft: microsoftLogo,
+      Twitter: twitterLogo,
+      Apple: appleLogo,
+      Coveo: coveoLogo,
+      Amazon: amazonLogo,
+      Google: googleLogo,
+      "Morgan Stanley": morganStanleyLogo,
+    };
+    return companyImages[companyName] || defaultLogo;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -30,60 +61,61 @@ const Contribute: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newInterview = new Interview(
-      formData.company,
-      formData.position,
-      { country: formData.country, city: formData.city },
-      formData.compensation ? `$${formData.compensation}/hour` : null,
-      formData.signOnBonus ? `$${formData.signOnBonus}` : null,
-      formData.date,
-      formData.additionalComments,
-      formData.questionTypes.split(",").map((q) => q.trim()),
-      parseInt(formData.rounds) || 0,
-      formData.employmentType as "Hybrid" | "Remote" | "In-Person",
-      formData.offer
-    );
+    const logo = getCompanyLogo(formData.name);
 
-    const existingInterviews = JSON.parse(
-      localStorage.getItem("interviews") || "[]"
-    );
-    existingInterviews.push(newInterview);
-    localStorage.setItem("interviews", JSON.stringify(existingInterviews));
+    const newJob = {
+      id: formData.id,
+      name: formData.name,
+      additionalComments: formData.additionalComments,
+      position: formData.position,
+      country: formData.country,
+      city: formData.city,
+      datePosted: formData.datePosted,
+      salary: parseFloat(formData.salary) || 0,
+      type: formData.type,
+      questionType: formData.questionType,
+      numberOfRounds: parseInt(formData.numberOfRounds) || 0,
+      signOnBonus: parseFloat(formData.signOnBonus) || 0,
+      offerStatus: formData.offerStatus,
+      logo, // Assign the logo dynamically
+    };
+
+    const existingJobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+    existingJobs.push(newJob);
+    localStorage.setItem("jobs", JSON.stringify(existingJobs));
 
     setFormData({
-      company: "",
+      id: Date.now(),
+      name: "",
+      additionalComments: "",
       position: "",
       country: "",
       city: "",
-      employmentType: "Hybrid",
-      date: "",
-      rounds: "",
-      questionTypes: "",
-      compensation: "",
+      datePosted: "",
+      salary: "",
+      type: "In-Person",
+      questionType: "",
+      numberOfRounds: "",
       signOnBonus: "",
-      additionalComments: "",
-      offer: "",
+      offerStatus: "No",
     });
 
-    // console.log(
-    //   "Saved Interviews:",
-    //   JSON.parse(localStorage.getItem("interviews") || "[]")
-    // );
+    alert("Job added successfully!");
   };
 
   return (
     <div className={styles.contributeContainer}>
-      <h1 className={styles.header}>Share Your Experience</h1>
+      {/* <h1 className={styles.header}>Share Your Experience</h1> */}
       <form onSubmit={handleSubmit} className={styles.form}>
-        {/* Company and Position */}
+        {/* Company Name and Position */}
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="company">Company Name</label>
+            <label htmlFor="name">Company Name</label>
             <input
               type="text"
-              id="company"
-              name="company"
-              value={formData.company}
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               required
             />
@@ -127,15 +159,16 @@ const Contribute: React.FC = () => {
           </div>
         </div>
 
-        {/* Work Mode and Interview Date */}
+        {/* Employment Type and Date */}
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="employmentType">Employment Type</label>
+            <label htmlFor="type">Employment Type</label>
             <select
-              id="employmentType"
-              name="employmentType"
-              value={formData.employmentType}
+              id="type"
+              name="type"
+              value={formData.type}
               onChange={handleChange}
+              required
             >
               <option value="In-Person">In-Person</option>
               <option value="Hybrid">Hybrid</option>
@@ -143,58 +176,71 @@ const Contribute: React.FC = () => {
             </select>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="date">Interview Date</label>
+            <label htmlFor="datePosted">Interview Date</label>
             <input
               type="date"
-              id="date"
-              name="date"
-              value={formData.date}
+              id="datePosted"
+              name="datePosted"
+              value={formData.datePosted}
               onChange={handleChange}
               required
             />
           </div>
         </div>
 
-        {/* Number of Rounds, Types of Questions, and Offer */}
+        {/* Salary, Number of Rounds, and Sign-on Bonus */}
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="rounds">Number of Rounds</label>
+            <label htmlFor="numberOfRounds">Number of Rounds</label>
             <input
               type="number"
-              id="rounds"
-              name="rounds"
-              value={formData.rounds}
+              id="numberOfRounds"
+              name="numberOfRounds"
+              value={formData.numberOfRounds}
               onChange={handleChange}
               required
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="questionTypes">Types of Questions</label>
+            <label htmlFor="questionType">Types of Questions</label>
             <input
               type="text"
-              id="questionTypes"
-              name="questionTypes"
-              placeholder="OOP, LeetCode, System Design, etc."
-              value={formData.questionTypes}
+              id="questionType"
+              name="questionType"
+              placeholder="LeetCode, System Design, etc."
+              value={formData.questionType}
               onChange={handleChange}
             />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="offerStatus">Offer Received</label>
+            <select
+              id="offerStatus"
+              name="offerStatus"
+              value={formData.offerStatus}
+              onChange={handleChange}
+            >
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
           </div>
         </div>
 
-        {/* Compensation and Sign-on Bonus */}
+        {/* Question Types and Offer Status */}
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="compensation">Hourly Rate (if applicable)</label>
+            <label htmlFor="salary">Hourly Salary (if applicable)</label>
             <input
               type="number"
-              id="compensation"
-              name="compensation"
-              value={formData.compensation}
+              id="salary"
+              name="salary"
+              value={formData.salary}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="signOnBonus">Sign-on Bonus (if applicable)</label>
+            <label htmlFor="signOnBonus">Sign-On Bonus (if applicable)</label>
             <input
               type="number"
               id="signOnBonus"
@@ -205,29 +251,13 @@ const Contribute: React.FC = () => {
           </div>
         </div>
 
-        {/* Offer */}
-        <div className={styles.row}>
-          <div className={styles.formGroup}>
-            <label htmlFor="offer">Offer Received</label>
-            <select
-              id="offer"
-              name="offer"
-              value={formData.offer}
-              onChange={handleChange}
-            >
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-
         {/* Additional Comments */}
         <div className={styles.formGroup}>
           <label htmlFor="additionalComments">Additional Comments</label>
           <textarea
             id="additionalComments"
             name="additionalComments"
-            placeholder="Describe your interview experience. Mention specific you were asked (technical, behavioral), topics covered, or any unique details about the process."
+            placeholder="Describe your interview experience..."
             rows={5}
             value={formData.additionalComments}
             onChange={handleChange}

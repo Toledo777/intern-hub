@@ -9,7 +9,7 @@ const ReviewList: React.FC = () => {
 
   // Fetch all jobs at once
   const fetchAllJobs = async () => {
-    const allJobs = getAllJobs(); 
+    const allJobs = getAllJobs();
     setJobs(allJobs);
   };
 
@@ -19,20 +19,21 @@ const ReviewList: React.FC = () => {
 
   return (
     <div className={styles.reviewContainer}>
-        <div className={styles.reviewHeader}>
-            <h1>Recommended reviews</h1>
-            <button className={styles.sortBtn}>Sort by</button>
-        </div>
+      <div className={styles.reviewHeader}>
+        <h1>Recommended reviews</h1>
+        <button className={styles.sortBtn}>Sort by</button>
+      </div>
       {jobs.map((job) => (
         <ReviewCard
           key={job.id}
           jobTitle={job.position}
           jobCompany={job.name}
-          jobReview={job.review}
+          jobAdditionalComments={job.additionalComments}
           jobCountry={job.country}
           jobCity={job.city}
           jobDate={job.datePosted}
           jobSalary={job.salary}
+          jobLogo={job.logo}
         />
       ))}
     </div>

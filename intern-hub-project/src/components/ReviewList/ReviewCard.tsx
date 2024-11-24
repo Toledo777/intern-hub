@@ -6,14 +6,15 @@ import BookmarkIcon from "../../assets/bookmark.svg?react";
 interface ReviewCardProps {
   jobTitle: string;
   jobCompany: string;
-  jobReview: string;
+  jobAdditionalComments: string;
   jobCountry: string;
   jobCity: string;
   jobDate: string;
   jobSalary: number;
+  jobLogo: string;
 }
 
-const ReviewCard: React.FC<ReviewCardProps> = ({ jobTitle, jobDate, jobCompany, jobSalary, jobCountry, jobCity }) => {
+const ReviewCard: React.FC<ReviewCardProps> = ({ jobTitle, jobDate, jobCompany, jobSalary, jobCountry, jobCity, jobLogo }) => {
   return (
     <div className={styles.reviewCard}>
       <div className={styles.reviewContent}>
@@ -27,7 +28,11 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ jobTitle, jobDate, jobCompany, 
 
         <div className={styles.positionSection}>
             <p>{jobCompany}</p>
-            <h3>{jobTitle}</h3>
+            
+            <div className={styles.titleIcon}>
+                <h3>{jobTitle}</h3>
+                <img className={styles.logo} src={jobLogo} alt="" />
+            </div>
         </div>
         
       </div>

@@ -11,6 +11,7 @@
     width: 100%;
     white-space: nowrap;
     border-bottom: 1px solid #505050;
+    z-index: 999;
 }
 
 .logo {

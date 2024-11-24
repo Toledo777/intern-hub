@@ -1,0 +1,10 @@
+.reviewList {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 10px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem 0rem 0rem 1rem;
+    justify-content: center;
+}

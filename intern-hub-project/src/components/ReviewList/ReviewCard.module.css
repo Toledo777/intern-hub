@@ -1,0 +1,93 @@
+.reviewCard {
+    background-color: #F9F9F9;
+    padding: 7px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #505050;
+    transition: transform 0.2s ease-in-out;
+    width: 340px;
+    height: auto;
+    border-radius: 25px;
+    color: black;
+}
+
+.reviewCard:hover {
+    transform: translateY(-5px);
+}
+
+.reviewContent {
+    padding: 13px;
+    border-radius: 20px;
+    min-height: 210px;
+    background-color: rgb(223, 223, 223);
+}
+
+.dateSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.dateSection p {
+    padding: 7px 10px 7px 10px;
+    background-color: white;
+    border-radius: 25px;
+}
+
+.bookmarkIcon {
+    background-color: white;
+    padding: 10px;
+    border-radius: 25px;
+    overflow: visible;
+}
+
+.bookmarkBtn:hover {
+    cursor: pointer;
+}
+
+.positionSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.positionSection > p {
+    margin-bottom: 0;
+}
+
+.positionSection > h3 {
+    margin: 0;
+}
+
+.reviewDetails {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 13px 15px 13px;
+    justify-content: space-between;
+}
+
+.leftDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.salary, .location {
+    margin: 0;
+    padding: 0;
+}
+
+.salary {
+    font-weight: 600;
+}
+
+.location {
+    color: rgb(94, 94, 94);
+}
+
+.detailsBtn {
+    border-radius: 25px;
+
+}

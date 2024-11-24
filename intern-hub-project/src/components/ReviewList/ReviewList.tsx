@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ReviewList.module.css";
 import ReviewCard from "./ReviewCard";
-import { Job } from "../../data/filters";
+import { Job } from "../../utils/filters";
 
 const ReviewList: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);

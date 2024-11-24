@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Searchbar from "./components/Searchbar/Searchbar";
 import FAQ from "./components/FAQ/FAQ"; // Import the FAQ component
+import MainContent from "./layout/MainContent";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
 }
 
 function Home() {
-  return <div>Welcome to InternHub!</div>;
+  return <MainContent />;
 }
 
 function Contribute() {

@@ -15,41 +15,41 @@
 }
 
 .logo {
-    font-weight: 600;
-    font-style: normal;
-    font-size: 24px;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
 }
 
 .navLinks {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .navbar a {
-    float: left;
-    display: block;
-    color: white;
-    padding: 24px 10px;
-    text-decoration: none;
-    font-size: 16px;
-    border-bottom: 1px solid transparent;
-    min-width: 40px;
-    font-weight: 300;
-    font-style: normal;
+  float: left;
+  display: block;
+  color: white;
+  padding: 24px 10px;
+  text-decoration: none;
+  font-size: 16px;
+  border-bottom: 1px solid transparent;
+  min-width: 40px;
+  font-weight: 300;
+  font-style: normal;
 }
 
 .navbar a:hover {
-    border-bottom: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .navbar a.active {
-    border-bottom: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .userSection {
-    font-style: normal;
+  font-style: normal;
 }
 
 .location {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }

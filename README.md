@@ -1,6 +1,5 @@
 # Intern Hub
-![image](https://github.com/user-attachments/assets/145f9127-4982-436f-826b-6d7488bb5825)
-
+![image](https://github.com/user-attachments/assets/0bae9e80-78f6-4e89-b9a3-7a0ea3f7e518)
 
 ## Inspiration
 Finding an internship is a challenging process, especially for students navigating interviews for the first time. Many students feel unprepared and unsure of what to expect from companies. We wanted to create **Intern Hub** to empower students by providing them with detailed, real-world insights into the interview processes at various companies. By students, for students, our platform ensures future candidates can learn from their peers' experiences and enter interviews with greater confidence.

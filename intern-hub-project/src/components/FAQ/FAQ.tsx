@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FAQ.module.css"; // Reusing your FAQ styles
+import styles from "./FAQ.module.css";
 
 const FAQ: React.FC = () => {
   return (

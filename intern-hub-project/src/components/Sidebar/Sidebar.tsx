@@ -9,12 +9,12 @@ const Sidebar: React.FC = () => {
         <h3>Filters</h3>
         </div>
         <div className={styles.filterGroup}>
-          <h4>Working Schedule</h4>
+          <h4>Offer Status</h4>
           <label>
-            <input type="checkbox" /> Full-time
+            <input type="checkbox" /> Offer
           </label>
           <label>
-            <input type="checkbox" /> Part-time
+            <input type="checkbox" /> Rejected
           </label>
         </div>
         <div className={styles.filterGroup}>

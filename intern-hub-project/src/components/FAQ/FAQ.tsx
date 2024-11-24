@@ -9,14 +9,12 @@ const FAQ: React.FC = () => {
       <div className={styles.faqItem}>
         <h3 className={styles.faqQuestion}>What is InternHub?</h3>
         <p className={styles.faqAnswer}>
-          Intern Hub is a centralized platform where students can anonymously
-          share and access reviews of internship interview experiences. It
-          empowers users to:
+        Intern Hub is a centralized platform where students can anonymously share and explore internship interview experiences. It allows users to:
           <ul>
             <li>Share insights about interviews with various companies.</li>
             <li>Access peer reviews, tips, and strategies for effective preparation.</li>
-            <li>Filter reviews by company, role, or difficulty level.</li>
-            <li>Learn about common interview questions and company expectations.</li>
+            {/* <li>Filter reviews by company, role, or difficulty level.</li>
+            <li>Learn about common interview questions and company expectations.</li> */}
           </ul>
         </p>
       </div>
